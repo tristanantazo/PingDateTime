@@ -1,0 +1,38 @@
+version: "3"
+services:
+  client-nginx:
+    container_name: "client-nginx"
+    build:
+      context: ./docker/nginx
+    depends_on:
+      - client-app
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/usr/app
+
+  client-app:
+    container_name: "client-app"
+    build:
+      context: ./docker/php
+    depends_on:
+      - client-mysql
+    ports:
+      - 5173:5173
+    volumes:
+      - ./src:/usr/app
+      - /usr/app/node_modules
+      - /usr/app/vendor
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+
+  client-mysql:
+    image: mysql:8.0.28
+    command: --max_allowed_packet=32505856
+    container_name: "client-mysql"
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=client
+    ports:
+      - 3306:3306
