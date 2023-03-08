@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+/**
+ * controller imports
+ */
+
+use App\Http\Controllers\DateTimeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +20,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('date-time')->group(function () {
+    // Route::post('/create', [TaskController::class, 'createTask'])->name('createTask');
+    // Route::post('/update', [TaskController::class, 'updateTask'])->name('updateTask');
+    Route::post('/delete', [DateTimeController::class, 'deleteRecord'])->name('deleteRecord');
+    Route::get('/all', [DateTimeController::class, 'getAllRecord'])->name('getAllRecord');
 });
