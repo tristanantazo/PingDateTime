@@ -27,4 +27,5 @@ Route::prefix('date-time')->group(function () {
     // Route::post('/update', [TaskController::class, 'updateTask'])->name('updateTask');
     Route::post('/delete', [DateTimeController::class, 'deleteRecord'])->name('deleteRecord');
     Route::get('/all', [DateTimeController::class, 'getAllRecord'])->name('getAllRecord');
+    Route::get('/ping', [DateTimeController::class, 'callDateTimeService'])->name('ping');
 });
