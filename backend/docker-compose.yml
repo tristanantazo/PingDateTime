@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  express-docker:
+    network_mode: host
+    environment:
+      - NODE_ENV=development
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    container_name: express-docker
+    expose:
+      - "4139"
+    ports:
+      - "4139:4139"
+    command: npm run watch

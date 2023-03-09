@@ -33,20 +33,26 @@ export default {
         return {
             tableData: [],
             newData: [],
+            defaultArea: "Asia",
+            defaultLocation: "Manila",
         };
     },
     created() {
-        axios.get(`${location.href}date-time/all`).then((response) => {
+        axios.get(`${location.href}date-time`).then((response) => {
             this.tableData = response.data;
         });
     },
     methods: {
         ping() {
-            axios.get(`${location.href}date-time/ping`).then((response) => {
-                this.newData = [];
-                this.newData.push(response.data);
-                this.tableData.unshift(response.data);
-            });
+            axios
+                .get(
+                    `${location.href}date-time/ping/${this.defaultArea}/${this.defaultLocation}`
+                )
+                .then((response) => {
+                    this.newData = [];
+                    this.newData.push(response.data);
+                    this.tableData.unshift(response.data);
+                });
         },
     },
 };

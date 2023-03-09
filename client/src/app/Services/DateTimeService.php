@@ -13,14 +13,13 @@ class DateTimeService
         return DateTime::orderBy('id', 'DESC')->get();
     }
 
-    public function callDateTimeApi()
+    public function callDateTimeApi($area, $location)
     {
         try {
-            $response = Http::get('https://api.publicapis.org/entries');
-
+            $response = Http::accept('application/json')->get('http://worldtimeapi.org/api/timezone/' . $area . '/' . $location);
             $data['header'] = $response->headers();
             $data['status'] = $response->status();
-            $data['body'] = $response->body();
+            $data['body'] = $response->json();
             return self::saveDateTime($data);
         } catch (\Throwable $th) {
             return $th;
@@ -31,8 +30,7 @@ class DateTimeService
     {
         try {
             $d = new DateTime;
-            $d->body = Carbon::now();
-            // $d->body = $data['body'];
+            $d->body = Carbon::createFromTimestamp($data['body']['datetime']);
             $d->header = json_encode($data['header']);
             $d->status = $data['status'];
             $d->save();

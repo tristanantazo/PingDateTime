@@ -20,13 +20,13 @@ class DateTimeController extends Controller
             $allDateTime = $this->dateTimeService->getAllDateTime();
             return response()->json($allDateTime);
         } catch (\Throwable $th) {
-            throw $th;
+            return $th;
         }
     }
 
-    public function callDateTimeService()
+    public function callDateTimeService(Request $request, $area, $location)
     {
-        $dateTime = $this->dateTimeService->callDateTimeApi();
+        $dateTime = $this->dateTimeService->callDateTimeApi($area, $location);
         return response()->json($dateTime);
     }
 }

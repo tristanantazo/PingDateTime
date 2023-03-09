@@ -1,15 +1,10 @@
 version: "3"
 
-networks:
-  client:
-
 services:
   client-nginx:
     container_name: "client-nginx"
     build:
       context: ./docker/nginx
-    networks:
-      - client
     depends_on:
       - client-app
     ports:
@@ -25,8 +20,6 @@ services:
       - client-mysql
     ports:
       - 5173:5173
-    networks:
-      - client
     volumes:
       - ./src:/usr/app
       - /usr/app/node_modules
@@ -45,8 +38,6 @@ services:
       MYSQL_ROOT_PASSWORD: root123
       MYSQL_PASSWORD: root123
       MYSQL_DATABASE: clientdb
-    networks:
-      - client
   phpmyadmin:
     image: phpmyadmin
     restart: always
@@ -59,5 +50,3 @@ services:
       PMA_PASSWORD: root123
     environment:
       - PMA_ARBITRARY=1
-    networks:
-      - client
