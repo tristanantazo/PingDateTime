@@ -25,7 +25,6 @@ Route::get('/', function () {
 Route::prefix('date-time')->group(function () {
     // Route::post('/create', [TaskController::class, 'createTask'])->name('createTask');
     // Route::post('/update', [TaskController::class, 'updateTask'])->name('updateTask');
-    Route::post('/delete', [DateTimeController::class, 'deleteRecord'])->name('deleteRecord');
-    Route::get('/all', [DateTimeController::class, 'getAllRecord'])->name('getAllRecord');
-    Route::get('/ping', [DateTimeController::class, 'callDateTimeService'])->name('ping');
+    Route::get('/', [DateTimeController::class, 'getAllRecord'])->name('getAllRecord');
+    Route::get('/ping/{area}/{location}', [DateTimeController::class, 'callDateTimeService'])->name('ping');
 });

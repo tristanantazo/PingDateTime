@@ -1,23 +1,21 @@
 const express = require("express");
 const app = express();
+const dateTimerRouter = require("./router/router");
+const errorHandler = require("./router/routerErrorHandler");
+
+const port = 4139;
+
 app.use(express.json());
 
-const books = [
-  { title: "Harry Potter", id: 1 },
-  { title: "Twilight", id: 2 },
-  { title: "Lorien Legacies", id: 3 },
-];
-
-//READ Request Handlers
-app.get("/", (req, res) => {
-  res.send("deee");
+app.get("/", function (req, res) {
+  res.send("hello this is my api");
 });
 
-app.get("/api/books", (req, res) => {
-  res.send(books);
-});
+app.use("/date-time", dateTimerRouter);
 
-const port = 3000;
+// error handler middleware
+app.use(errorHandler);
+
 app.listen(port, () => {
-  console.log(`Express Js is listening port ${port}`);
+  console.log(`Server running on port ${port}`);
 });

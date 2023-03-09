@@ -4,6 +4,8 @@ bash:
 	@docker compose exec client-app bash
 down:
 	@docker-compose down
+dockerup:
+	@docker-compose up -d
 
 migrateseed:
 	@docker-compose exec -it php php artisan migrate:fresh
