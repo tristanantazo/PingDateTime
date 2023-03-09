@@ -1,5 +1,5 @@
 /backend/node_modules
-/client/docker/mysql
+/client/docker/mysql/
 /client/.phpunit.cache
 /client/node_modules
 /client/public/build
