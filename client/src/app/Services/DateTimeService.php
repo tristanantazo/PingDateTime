@@ -30,7 +30,7 @@ class DateTimeService
     {
         try {
             $d = new DateTime;
-            $d->body = Carbon::createFromTimestamp($data['body']['datetime']);
+            $d->body = $data['body']['datetime'];
             $d->header = json_encode($data['header']);
             $d->status = $data['status'];
             $d->save();
